@@ -1,7 +1,7 @@
-# Ignore build output
-build/
-
 # Ignore Linux executables
 *
 !*/
 !*.*
+
+# Ignore build output
+build/*

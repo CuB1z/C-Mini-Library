@@ -7,6 +7,15 @@ C library developed for a university project that emulates the behavior of some 
 - `longlines`: Prints the number of lines specified by the user that are the longest in the input.
 
 ## 🚀 Usage
+To test the library, you can compile the `test.c` file with the following command:
+```bash
+./compila.sh
+```
+
+Then, you can run the compiled file with the following command:
+```bash
+./test
+```
 
 ## 📜 Credits
 
