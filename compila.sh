@@ -4,29 +4,25 @@
 BUILD_DIR=./build
 OUTPUT_DIR=./
 
-# Define the usage message and the default value for the execution flag
-USE="Usage: $0 [-h | -e | --help | --exec]"
-EXEC="false"
+# Define the usage message
+USE="Usage: $0 [OPTION]\nOptions:\n  -h, --help\tDisplay this help message."
 
 # Arguments Control
 if [ $# -eq 1 ]
 then
     if [[ $1 = "-h" ]] || [[ $1 = "--help" ]]
     then
-        echo $USE
+        echo -e $USE
         exit 0
-    elif [[ $1 = "-e" ]] || [[ $1 = "--exec" ]]
-    then
-        EXEC="true"
     else
-        echo "Error: Invalid argument."
-        echo $USE
+        echo "Error: Invalid argument.\n"
+        echo -e $USE
         exit 1
     fi
 elif [ $# -gt 1 ]
 then
     echo "Error: Unexpected number of arguments."
-    echo $USE
+    echo -e $USE
     exit 1
 fi
 
@@ -54,16 +50,5 @@ then
     exit 2
 fi
 
-# [Program Execution] (Optional) ===============================>>
-if [[ $EXEC == "true" ]]
-then
-    ./"$OUTPUT_DIR/test"
-
-    if [ $? -ne 0 ]
-    then
-        echo "Error: The program failed to execute."
-        exit 2
-    fi
-else
-    echo "The program was compiled successfully."
-fi
+# [Success Message] ============================================>>
+echo "The program was compiled successfully."
