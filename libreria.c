@@ -23,12 +23,12 @@ int head(int N) {
         
         // Handle getline errors
         if (readBytes == -1) {
-            fprintf(stderr, "Error reading line %d\n", i);
+            fprintf(stderr, "Error reading line %d\n", i + 1);
             return 1;
         }
 
         // Print the line
-        printf("%s", buffer);
+        fprintf(stdout, "%s", buffer);
     }
 
     return 0;
