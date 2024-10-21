@@ -46,6 +46,16 @@ int tail(int N) {
 }
 
 /**
+ * Compares two strings by their length.
+ * @param a First string.
+ * @param b Second string.
+ * @return 0 if the strings have the same length, a positive number if the first string is longer, and a negative number if the second string is longer.
+ */
+int compareStringsByLength(const void * a, const void * b) {
+    return strlen(*(char **)b) - strlen(*(char **)a);
+}
+
+/**
  * Prints the longest N lines from stdin.
  * @param N Number of lines to print.
  * @return 0 if the function was executed successfully.
@@ -56,6 +66,7 @@ int longlines(int N) {
     char * buffer;
     int count = 0;
     int i, worstLine, worstLineIndex;
+
 
     // Allocate memory for the data storage
     data = (char **) malloc(N * sizeof(char *));
@@ -70,13 +81,9 @@ int longlines(int N) {
     while (getline(&buffer, &len, stdin) != EOF) {
         // Get current line length
         int lineLength = strlen(buffer);
-
-        printf("Buffer: %s\n", buffer);
-        printf("Size: %d\n\n", lineLength);
         
         // Add the line if the data storage isn't full yet
         if (count < N) {
-            printf("Buffer: %s", buffer);
             strcpy(data[count], buffer);
             count++;
         
@@ -101,9 +108,12 @@ int longlines(int N) {
         }
     }
 
+    // Sort the data using QuickSort and the compareStringsByLength function
+    qsort(data, N, sizeof(char *), compareStringsByLength);
+
     // Print data and free lines allocated memory
     for (i = 0; i < N; i++) {
-        printf("%s", data[i]);
+        fprintf(stdout, "%s", data[i]);
         free(data[i]);
     }
 
