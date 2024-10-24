@@ -42,81 +42,51 @@ int head(int N) {
  * @return 0 if the function was executed successfully.
  */
 int tail(int N) {
-
-    // Declare a structure to store the lines
-    struct entry{
-        char *line;
-        TAILQ_ENTRY(entry) entries;
-    };
-    
     size_t len = LINE_LENGTH;
+    char ** data;
     char * buffer;
-    int i, count = 0;
-    struct entry * item, * aux;
+    int i, current = 0;
 
-    // Declare a structure to store the head of the list
-    TAILQ_HEAD(tailhead, entry) head;
-
-    // Initialize the list
-    TAILQ_INIT(&head);
+    // Allocate memory for the data storage
+    data = (char **) malloc(N * sizeof(char *));
+    for (i = 0; i < N; i++) {
+        data[i] = (char *) malloc(len);
+    }
 
     // Allocate memory for the buffer
     buffer = (char *) malloc(len);
 
-    // Iterate over the stdin
+    // Iterate over the stdin and save the last N lines
     while (getline(&buffer, &len, stdin) != EOF) {
-        // Allocate memory for the read line
-        item = (struct entry *) malloc(sizeof(struct entry));
-        item->line = (char *) malloc(len);
-
         // Copy the line to the allocated memory
-        strcpy(item->line, buffer);
+        strcpy(data[current], buffer);
 
         // Add the line if the list isn't full yet
-        if (count < N) {
-            TAILQ_INSERT_TAIL(&head, item, entries);
-            count++;
-        
-        // Remove the first line and add the new one
+        if (current < N - 1) {
+            current++;
         } else {
-            // Save current head to free memory
-            aux = TAILQ_FIRST(&head);
-
-            // Remove the current head
-            TAILQ_REMOVE(&head, aux, entries);
-
-            // Add the new line to the queue
-            TAILQ_INSERT_TAIL(&head, item, entries);
-
-            // Free the memory of the removed item
-            free(aux->line);
-            free(aux);
+            current = 0;
         }
-
-    }
-        
-    // Print N lines from the list
-    TAILQ_FOREACH(item, &head, entries) {
-        fprintf(stdout, "%s", item->line);
     }
 
-// Free allocated memory used by the structure data
+    // Print the data and free lines allocated memory
     for (i = 0; i < N; i++) {
-        // Save current head to free memory
-        aux = TAILQ_FIRST(&head);
+        fprintf(stdout, "%s", data[current]);
 
-        // Remove the current head
-        TAILQ_REMOVE(&head, aux, entries);
+        // Free line allocated memory
+        free(data[current]);
 
-        // Add the new line to the queue
-        TAILQ_INSERT_TAIL(&head, item, entries);
+        // Update current index
+        current++;
 
-        // Free the memory of the removed item
-        free(aux->line);
-        free(aux);
+        // Reset current index if it reaches the end
+        if (current == N) {
+            current = 0;
+        }
     }
 
-    // Free the buffer memory
+    // Free previous allocated memory
+    free(data);
     free(buffer);
 
     return 0;
