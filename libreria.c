@@ -111,9 +111,12 @@ int longlines(int N) {
     size_t len = LINE_LENGTH;
     char ** data;
     char * buffer;
+    int * lengths;
     int count = 0;
     int i, worstLine, worstLineIndex;
 
+    // Allocate memory for the lengths storage
+    lengths = (int *) malloc(N * sizeof(int));
 
     // Allocate memory for the data storage
     data = (char **) malloc(N * sizeof(char *));
@@ -132,18 +135,19 @@ int longlines(int N) {
         // Add the line if the data storage isn't full yet
         if (count < N) {
             strcpy(data[count], buffer);
+            lengths[count] = lineLength;
             count++;
         
         // Check if the new line is better than the worst line
         } else {
             // Initialize "worst" variables
-            worstLine = strlen(data[0]);
+            worstLine = lengths[0];
             worstLineIndex = 0;
 
             // Iterate over the rest of the data and update "worst" variables
             for (i = 1; i < N; i++) {
-                if (strlen(data[i]) < worstLine) {
-                    worstLine = strlen(data[i]);
+                if (lengths[i] < worstLine) {
+                    worstLine = lengths[i];
                     worstLineIndex = i;
                 }
             }
@@ -151,6 +155,7 @@ int longlines(int N) {
             // Check if the current line is better than the worst one
             if (lineLength > worstLine) {
                 strcpy(data[worstLineIndex], buffer);
+                lengths[worstLineIndex] = lineLength;
             }
         }
     }
