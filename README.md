@@ -22,4 +22,4 @@ Then, you can run the compiled file with the following command:
 | Name          | GitHub                                       | LinkedIn                                                    |
 | ------------- | -------------------------------------------- | ----------------------------------------------------------- |
 | Diego Sánchez | [@CuB1z](https://github.com/CuB1z)           | [Diego Sánchez](https://www.linkedin.com/in/cub1z/)         |
-| Daniel Santos | [@danisntoss](https://github.com/danisntoss) | [Daniel Santos ](https://www.linkedin.com/in/danisantos15/) |
+| Daniel Santos | [@danisntoss](https://github.com/danisntoss) | [Daniel Santos ](https://www.linkedin.com/in/danisntoss/) |
