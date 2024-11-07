@@ -2,8 +2,8 @@
 
 ## 📝 Description
 C library developed for a university project that emulates the behavior of some terminal commands. The commands that are "emulated" are:
-- `Head`: Prints the first 10 lines read from standard input or the number of lines specified by the user.
-- `Tail`: Prints the last 10 lines read from standard input or the number of lines specified by the user.
+- `head`: Prints the first 10 lines read from standard input or the number of lines specified by the user.
+- `tail`: Prints the last 10 lines read from standard input or the number of lines specified by the user.
 - `longlines`: Prints the number of lines specified by the user that are the longest in the input.
 
 ## 🚀 Usage
@@ -14,7 +14,7 @@ To test the library, you can compile the `test.c` file with the following comman
 
 Then, you can run the compiled file with the following command:
 ```bash
-./test
+./test  [-head | -tail | -longlines] [lines number (OPTIONAL)]
 ```
 
 ## 📜 Credits
