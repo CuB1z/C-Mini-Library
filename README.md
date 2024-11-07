@@ -14,7 +14,12 @@ To test the library, you can compile the `test.c` file with the following comman
 
 Then, you can run the compiled file with the following command:
 ```bash
-./test  [-head | -tail | -longlines] [lines number (OPTIONAL)]
+./test -<function> <number> 
+```
+
+Where `<function>` is the function you want to test and `<number>` is the number of lines you want to read. For example:
+```bash
+./test -head 5
 ```
 
 ## 📜 Credits
