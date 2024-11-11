@@ -14,14 +14,14 @@ const int LINE_LENGTH = 1024;
 int head(int N) {
     size_t len = LINE_LENGTH;
     char * buffer;
-    int i;
+    int i, readBytes;
 
     // Allocate memory for the buffer
     buffer = (char *) malloc(len);
 
     for (i = 0; i < N; i++) {
         // Read a line from stdin
-        int readBytes = getline(&buffer, &len, stdin);
+        readBytes = getline(&buffer, &len, stdin);
         
         // Handle getline errors
         if (readBytes == -1) {
@@ -113,7 +113,7 @@ int longlines(int N) {
     char * buffer;
     int * lengths;
     int count = 0;
-    int i, worstLine, worstLineIndex;
+    int i, worstLine, worstLineIndex, lineLength;
 
     // Allocate memory for the lengths storage
     lengths = (int *) malloc(N * sizeof(int));
@@ -130,7 +130,7 @@ int longlines(int N) {
     // Iterate over the stdin
     while (getline(&buffer, &len, stdin) != EOF) {
         // Get current line length
-        int lineLength = strlen(buffer);
+        lineLength = strlen(buffer);
         
         // Add the line if the data storage isn't full yet
         if (count < N) {
