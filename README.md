@@ -1,6 +1,5 @@
 # C Library for emulating Terminal Commands 📚
 
-## 📝 Description
 C library developed for a university project that emulates the behavior of some terminal commands. The commands that are "emulated" are:
 - `head`: Prints the first 10 lines read from standard input or the number of lines specified by the user.
 - `tail`: Prints the last 10 lines read from standard input or the number of lines specified by the user.
